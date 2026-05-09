@@ -1,0 +1,17 @@
+# NASM build artefacts
+bin/**/*.lst
+*.lst
+*.obj
+*.map
+
+# OS / editor cruft
+Thumbs.db
+.DS_Store
+desktop.ini
+*~
+*.swp
+
+# Local working copies of test BMPs in bin/ (canonical copies live in
+# "Images for testing/")
+bin/**/*.bmp
+bin/**/*.BMP
