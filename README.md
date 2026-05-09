@@ -21,8 +21,12 @@ displays standard 4-bit (16-color) BMP files in this mode on real hardware.
 
 PLAN-BMP has been verified on a real **Schneider EuroPC** (the GIFs in the
 comparison gallery below are direct video captures of the EuroPC monitor
-output, not emulator screenshots) and on the **Amstrad PC1640** in 86Box
-with the internal video personality set to CD/CGA.
+output, not emulator screenshots) and cross-checked in 86Box.
+
+> **Not yet tested on a real Amstrad PC1640.** The PC1640 path (the extra
+> `3D8h`/`3DBh` unlock pokes) is included on the basis of the Sierra
+> `PCPLUS.DRV` reference and 86Box behaviour, but has not been confirmed on
+> physical PC1640 hardware. Reports from PC1640 owners are very welcome.
 
 > **Capture chain.** EuroPC TTL RGBI → [MCE2VGA / MCE2HDMI](https://www.serdashop.com/)
 > from Serdashop → Elgato 4K S capture card → MP4 → animated GIF.
@@ -51,8 +55,7 @@ For each test image, up to four cells are shown, left-to-right:
 2. **EuroPC (live)** — animated GIF captured from a real Schneider EuroPC.
 3. **EuroPC (dithered)** — same image with the 2×2 checkerboard dither
    toggled on (Enter).
-4. **86Box (PC1640)** — reference capture from 86Box emulating an Amstrad
-   PC1640 in CGA personality.
+4. **86Box** — reference capture from 86Box for visual comparison.
 
 Where a column is missing, that capture wasn't taken.
 
@@ -109,9 +112,10 @@ machines.
 | 1 (extended) | `B800:4000`–`B800:7FFF` | I, B | `(B << 1) \| I` |
 
 > **Note on plane 1.** The Sierra `PCPLUS.DRV` reference uses
-> `(I << 1) \| B`. On real EuroPC and PC1640 hardware that produces swapped
-> intensity. PLAN-BMP uses `(B << 1) \| I`, verified with the
-> `PLAN-16COLORS.COM` 4×4 chart diagnostic on real hardware.
+> `(I << 1) \| B`. On real EuroPC hardware that produces swapped intensity.
+> PLAN-BMP uses `(B << 1) \| I`, verified with the `PLAN-16COLORS.COM` 4×4
+> chart diagnostic on real EuroPC hardware. The encoding has not yet been
+> confirmed on a real Amstrad PC1640.
 
 ## Architecture
 
@@ -241,12 +245,12 @@ Files that don't match are rejected with a one-line error.
 | `PLAN-16COLORS.asm` | 4×4 color-chart diagnostic used to verify plane encoding on real hardware |
 | `Images for testing/` | Sample BMPs (Sierra titles, demos, photos) |
 | `Screenshots/EuroPC/` | Captures from a real Schneider EuroPC (PNGs + animated GIFs) |
-| `Screenshots/86box/` | Reference screenshots from 86Box emulation (PC1640 in CGA personality) |
+| `Screenshots/86box/` | Reference screenshots from 86Box for visual comparison |
 
 ## Credits
 
-- **Retro Erik** — code, hardware verification on Schneider EuroPC and
-  Amstrad PC1640, and 86Box screenshots.
+- **Retro Erik** — code, hardware verification on Schneider EuroPC, and
+  86Box reference screenshots. (Not yet tested on a real Amstrad PC1640.)
 - Plantronics plane-1 encoding corrected against the Sierra
   `foss_sci_drivers` PCPLUS.DRV reference using the `PLAN-16COLORS`
   diagnostic on real hardware.
